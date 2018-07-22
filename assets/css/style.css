@@ -249,69 +249,23 @@ input::placeholder {
 	    transform: translate(-50%, -50%);
 }
 
-/* If we want to avoid using video on mobile - use below */
-
-/*@media (max-width: 767px) {
-    .bg-video-container {
-        background: url('http://dev2.slicejack.com/fullscreen-video-demo/img/videoframe.jpg') center center / cover no-repeat;
-    }
-
-    .bg-video{
-        display: none;
-    }
-}*/
-
 /* We're going max-width cuz mobile first is for cowards */
 
-@media screen and (max-width: 980px)  {
-	section {
-		padding: 0 2.5%;
-	}
-	main section {
-		width: 60%;
-		margin-right: 35%;
-	}
-
-	nav ul {
-		margin-right: 0;
-	}
-
-	.img-link {
-		margin-right: 4.5%;
-		width:45%;
-	}
-
-	.img-link:nth-child(odd){
-		margin-right: 0;
-	}
-
-	.img-link img {
-		width:100%;
-	}
-}
-
-@media screen and (max-width: 768px) {
-	section, main section {
-		width: 90%;
-		margin-right: auto;
-	}
-}
-
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 780px) {
 	header{
 		position: static;
 	}
 
-	header > section {
+	section {
 		padding: 0;
 		width: 100%;
 	}
 
-	main {
-		margin-top: 1.5em;
+	.main {
+		padding-top: 1.5em;
 	}
 
-	main section {
+	.main section {
 		width: 85%;
 		padding: 4%;
 	}
@@ -332,14 +286,15 @@ input::placeholder {
 	}
 
 	nav ul{
-		margin: 1.2em 0;
+		margin: 1.2em 0 0;
+    	padding-bottom: 1.2em;
 	}
 
 	nav ul li a{
 		font-size: 100%;
 	}
 
-	.profile-photo {
+	.left-col {
 		float:none;
 		width: 100%;
 		height:auto;
@@ -350,9 +305,25 @@ input::placeholder {
 		margin-right: 0;
 		width: 100%;
 	}
+	.img-link img {
+		width:100%;
+		height:auto;
+	}
 
 	.img-link a {
 		padding: 2% 0;
 	}
+
+	.bg-video-container {
+        background: url('../media/hero-video-poster.jpg') center center / cover no-repeat;
+    }
+
+    .bg-video{
+        display: none;
+    }
+
+    .contact {
+    	width:40%;
+    }
 
 }
