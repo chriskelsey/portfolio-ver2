@@ -1,0 +1,336 @@
+body {
+	font: 1em/1.25em 'Poppins', 'Helvetica Neue', Helvetica, sans-serif;
+	background: #fff;
+	color: #777;
+}
+
+p {
+	margin-bottom: 1em;
+	line-height: 2em;
+}
+
+h1, h2 {
+	font: bold 175%/225% 'Montserrat', sans-serif;
+	padding-bottom: 0.4em
+}
+
+p.title {
+	font: bold 175%/175% 'Expletus Sans', sans-serif;
+	display: block;
+	float:left;
+	margin-bottom:0;
+	color:#000;
+
+}
+
+header {
+	position:fixed;
+	top:0;
+	background: #fff;
+	width:  100%;
+	z-index:10;
+}
+
+nav {
+	float:right;
+}
+
+nav ul {
+	margin: 1em 0 0;
+}
+
+nav ul li {
+	display: inline-block;
+	padding: 0 0.25em;
+	line-height: 75%;
+}
+
+nav ul li a {
+	color: #777;
+	margin: 0 0.5em;
+	text-decoration: none;
+	font-size: 110%;
+}
+
+nav ul li  a:hover {
+	background-color: #ddd;
+	color: #fff;
+}
+
+nav ul li a.active {
+	color:#a500ff;
+}
+
+footer {
+	border-top: 5px solid #a500ff;
+	background-color: #666;
+	height:4em;
+	color: #999;
+	text-align: center;
+	padding-top: 1.25em;
+}
+
+section {
+	width: 100%;
+	padding: 0 2em;
+	max-width: 896px;
+	margin:0 auto;
+}
+
+.main {background-color: #fff;}
+
+.main > section {
+	padding: 2em;
+}
+
+.left-col{
+	float:left;
+	width: 45%;
+	margin-right: 5%;
+}
+
+.intro {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	resize: both;
+  	overflow: auto;
+  	background: rgba(0,0,0,0.6);
+}
+
+.intro h2 {
+	width:100%;
+	text-align: center;
+	text-transform: uppercase;
+	color:#fff;
+	font-size: 4em;
+	padding:0;
+}
+
+.intro p {
+	width:100%;
+	text-align: center;
+	clear:left;
+	font-size: 150%;
+}
+
+.intro p > span {
+	color:#a500ff;
+	font-weight:bold;
+}
+
+.profile-photo {
+	margin: 0.5em 0 0;
+	width: 100%;
+	height: auto;
+}
+
+.img-link {
+	float:left;
+	position: relative;
+	margin: 1.6em 2.5em 1.6em 0;
+}
+
+.img-link a {
+	position: absolute;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    bottom: 1.25em;
+    font-size: 125%;
+    line-height: 200%;
+	background-color: #a500ff;
+	color: #fff;
+	text-decoration: none;
+}
+
+.contact-info i {
+    color: #a500ff;
+    line-height: 60px;
+    height: 70px;
+    border-radius: 50%;
+    width: 70px;
+    border: 3px solid #a500ff;
+}
+
+textarea, input {
+	display:block;
+	width:98%;
+	padding: .5em 1%;
+	font-size: .825em;
+	border:1px solid #ddd;
+	margin-bottom: 1.5em;
+}
+
+label {
+	font-size: 110%;
+	margin-bottom: 0.5em;
+	display:block;
+	width:100%;
+}
+
+button {
+	font-size: 1.25em;
+	color:#fff;
+	background-color: #a500ff;
+	padding:0.5em 2em;
+	border:none;
+	cursor: pointer;
+}
+input::placeholder {
+	color: #999;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #999;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #999;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #999;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #999;
+}
+
+.clearfix::after {
+    content: "";
+    display:block;
+    clear:both;
+}
+
+/* Fancy Background Video */
+
+
+.bg-video-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+	    transform: translate(-50%, -50%);
+}
+
+/* If we want to avoid using video on mobile - use below */
+
+/*@media (max-width: 767px) {
+    .bg-video-container {
+        background: url('http://dev2.slicejack.com/fullscreen-video-demo/img/videoframe.jpg') center center / cover no-repeat;
+    }
+
+    .bg-video{
+        display: none;
+    }
+}*/
+
+/* We're going max-width cuz mobile first is for cowards */
+
+@media screen and (max-width: 980px)  {
+	section {
+		padding: 0 2.5%;
+	}
+	main section {
+		width: 60%;
+		margin-right: 35%;
+	}
+
+	nav ul {
+		margin-right: 0;
+	}
+
+	.img-link {
+		margin-right: 4.5%;
+		width:45%;
+	}
+
+	.img-link:nth-child(odd){
+		margin-right: 0;
+	}
+
+	.img-link img {
+		width:100%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	section, main section {
+		width: 90%;
+		margin-right: auto;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	header{
+		position: static;
+	}
+
+	header > section {
+		padding: 0;
+		width: 100%;
+	}
+
+	main {
+		margin-top: 1.5em;
+	}
+
+	main section {
+		width: 85%;
+		padding: 4%;
+	}
+
+	nav, p.title {
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
+
+	h1 {
+		margin-top: 0;
+	}
+
+	p.title {
+		margin:0;
+		padding:0.5em 0;
+	}
+
+	nav ul{
+		margin: 1.2em 0;
+	}
+
+	nav ul li a{
+		font-size: 100%;
+	}
+
+	.profile-photo {
+		float:none;
+		width: 100%;
+		height:auto;
+		margin-bottom: 1.5em;
+	}
+
+	.img-link {
+		margin-right: 0;
+		width: 100%;
+	}
+
+	.img-link a {
+		padding: 2% 0;
+	}
+
+}
