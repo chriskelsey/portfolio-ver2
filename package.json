@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-ver2",
+  "version": "1.0.0",
+  "description": "## Redone version of Portfolio",
+  "main": "server.js",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "create-react-app": "^2.1.8",
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriskelsey/portfolio-ver2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chriskelsey/portfolio-ver2/issues"
+  },
+  "homepage": "https://github.com/chriskelsey/portfolio-ver2#readme"
+}
