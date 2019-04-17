@@ -1,2 +1,4 @@
 public/sftp-config.json
+public/.htaccess
 node_modules
+DS_Store

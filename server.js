@@ -12,5 +12,3 @@ app.use(express.static("public"));
 app.listen(PORT, () => {
 	console.log(`listening on ${PORT}!`);
 });
-
-//Left off without fully setting up react - Able to get html, but not css - Session 19.2 - Video stopped @1:46:01
