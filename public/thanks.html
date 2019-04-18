@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Chris Kelsey - Full Stack Developer</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Default Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Expletus+Sans|Montserrat:400,700,900|Poppins:300" rel="stylesheet">
+	<!-- FontAwesome Icons -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+<body>
+	<!-- PHP form parsing for now to save time - will replace later -->
+	<?php
+		$to      = 'chris@chriskelsey.net';
+		$name 	 = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+		$from 	 = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+		$subject = 'New email from chriskelsey.net form';
+		$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+		$message .= "Name: ".$name."\n";
+	    $message .= "Email: ".$from."\n";
+	    $message .= "Comments: ".$comment."\n";
+
+	mail($to, $subject, $message);
+	?>
+	<p>Thanks for signing up.</p>
+</body>
+</html>

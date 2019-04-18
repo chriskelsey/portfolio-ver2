@@ -15,6 +15,8 @@ h1, h2 {
 	margin-bottom: 1.5em;
 }
 
+a {color:#a500ff;}
+
 p.title {
 	font: bold 175%/175% 'Expletus Sans', sans-serif;
 	display: block;
@@ -106,6 +108,11 @@ section {
   	background: rgba(0,0,0,0.6);
 }
 
+.intro a {
+	font-weight:bold;
+	text-decoration: none;
+}
+
 .intro h2 {
 	width:100%;
 	text-align: center;
@@ -121,11 +128,6 @@ section {
 	text-align: center;
 	clear:left;
 	font-size: 150%;
-}
-
-.intro p > span {
-	color:#a500ff;
-	font-weight:bold;
 }
 
 .profile-photo {
@@ -191,14 +193,16 @@ label {
 	width:100%;
 }
 
-button {
+a.button, button {
 	font-size: 1.25em;
 	color:#fff;
 	background-color: #a500ff;
 	padding:0.5em 2em;
 	border:none;
 	cursor: pointer;
+	text-decoration: none;
 }
+
 input::placeholder {
 	color: #999;
 }
