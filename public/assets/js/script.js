@@ -5,7 +5,7 @@ $(document).ready(function() {
 	});
 });
 
-$('nav ul li a').on('click',function (e) {
+$('nav ul li a, .intro a').on('click',function (e) {
 	var div = $(this).attr('href');
 	console.log(div);
     $('html,body').animate({
@@ -14,4 +14,9 @@ $('nav ul li a').on('click',function (e) {
         method: 'swing'
     });
     e.preventDefault();
+});
+
+$('button').on('click', function(){
+	$('form').hide();
+	$('.contact-form').load('/thanks.html');
 });
