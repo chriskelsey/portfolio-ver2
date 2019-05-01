@@ -220,6 +220,18 @@ input::placeholder {
   color: #999;
 }
 
+.form-response {
+	display: block;
+    clear: left;
+    margin: 3em 2em;
+    padding: 2em 0;
+}
+
+.form-response p {
+	text-align: center;
+	font-size: 125%;
+}
+
 .clearfix::after {
     content: "";
     display:block;

@@ -16,7 +16,16 @@ $('nav ul li a, .intro a').on('click',function (e) {
     e.preventDefault();
 });
 
-$('button').on('click', function(){
-	$('form').hide();
-	$('.contact-form').load('/thanks.html');
+$('form').on('submit', function(e){
+	e.preventDefault();
+	$this = $(this);
+    $.ajax({
+       type: 'POST',
+       url: $this.attr('action'),
+       data: $this.serialize(),
+       success : function(data){
+		$('form').hide();
+		$('.contact-form').load('/thanks.html .form-response');
+       }
+    });
 });
