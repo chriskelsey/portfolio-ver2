@@ -15,16 +15,48 @@
 <body>
 	<!-- PHP form parsing for now to save time - will replace later -->
 	<?php
-		$to      = 'chris@chriskelsey.net';
-		$name 	 = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-		$from 	 = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-		$subject = 'New email from chriskelsey.net form';
-		$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
-		$message .= "Name: ".$name."\n";
-	    $message .= "Email: ".$from."\n";
-	    $message .= "Comments: ".$comment."\n";
+		session_start();
+		if(isset($_POST)){
+			//declare variables
+			$to      = 'chris@chriskelsey.net';
+			$name 	 = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+			$from 	 = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+			$subject = 'New email from chriskelsey.net form';
+			$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+			$message .= "Name: ".$name."\n";
+		    $message .= "Email: ".$from."\n";
+		    $message .= "Comments: ".$comment."\n";
+			
+			//Check for blanks, more complicated error handling done on client side
+			if(empty($name)){
+				$_SESSION['errors']['name'] = "Please enter a name";
+			}
+			if(empty($from)){
+				$_SESSION['errors']['email'] = "Please enter a valid email address";
+			}
+			if(empty($comment)){
+				$_SESSION['errors']['message'] = "Please enter a comment";
+			}
+			if(count($_SESSION['errors']) > 0){
+				//If JS is on
+				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+					echo json_encode($_SESSION['errors']);
+					exit;
+				}
+				//If JS is off - quick and dirty
+				echo "<ul>";
+				foreach ($_SESSION['errors'] as $key => $value) {
+					echo "<li>" . $value . "</li>";
+				}
+				echo "</ul>";
+				exit;
+			}
+			else {
+				mail($to, $subject, $message);
+			}
+		}
 
-	mail($to, $subject, $message);
+	
 	?>
 	<div class = "form-response">
 		<p>Thanks for reaching out. I'll get back to you as soon as I can.</p>
