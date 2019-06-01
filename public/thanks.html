@@ -1,3 +1,54 @@
+<?php
+//PHP form parsing for now to save time - will replace later
+	session_start();
+	if(isset($_POST)){
+		//declare variables
+		$to      = 'chris@chriskelsey.net';
+		$name 	 = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+		$from 	 = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+		$subject = 'New email from chriskelsey.net form';
+		$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+		$message .= "Name: ".$name."\n";
+	    $message .= "Email: ".$from."\n";
+	    $message .= "Comments: ".$comment."\n";	
+		
+		//Check for form errors
+		//Checks for numbers not being in Name, this is due to me receiving a lot of spam with random strings in the Name column
+		/*if(empty($_POST['name']) || !preg_match('/([0-9])+/', $_POST['name'])){
+			$_SESSION['errors']['name'] = "Please enter a valid name ";
+		}
+		//Email regular expression - 90/10 rule to prevent anything else being added in.
+		if(empty($_POST['email']) || !preg_match('/^\S+@\S+\.\S+$/', $_POST['email'])){
+			$_SESSION['errors']['email'] = "Please enter a valid email address";
+		}
+		if(empty($_POST['message'])){
+			$_SESSION['errors']['message'] = "Please enter a comment";
+		}*/
+		if(empty($_POST['name'])){
+			$_SESSION['errors']['name'] = "Please enter a valid name " .$_POST['name'] ;
+		}
+		if(empty($_POST['email'])){
+			$_SESSION['errors']['email'] = "Please enter a valid email address";
+		}
+		if(empty($_POST['message'])){
+			$_SESSION['errors']['message'] = "Please enter a comment";
+		}
+		if(count($_SESSION['errors']) > 0){
+			//If JS is on
+			if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+				echo json_encode($_SESSION['errors']);
+				exit;
+		}
+			//If off
+			$noJS = true;
+			exit;
+		}
+		else {
+			mail($to, $subject, $message);
+		}
+	}
+	session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -13,51 +64,19 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
-	<!-- PHP form parsing for now to save time - will replace later -->
-	<?php
-		session_start();
-		if(isset($_POST)){
-			//declare variables
-			$to      = 'chris@chriskelsey.net';
-			$name 	 = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-			$from 	 = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-			$subject = 'New email from chriskelsey.net form';
-			$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
-			$message .= "Name: ".$name."\n";
-		    $message .= "Email: ".$from."\n";
-		    $message .= "Comments: ".$comment."\n";
-			
-			//Check for blanks, more complicated error handling done on client side
-			if(empty($name)){
-				$_SESSION['errors']['name'] = "Please enter a name";
-			}
-			if(empty($from)){
-				$_SESSION['errors']['email'] = "Please enter a valid email address";
-			}
-			if(empty($comment)){
-				$_SESSION['errors']['message'] = "Please enter a comment";
-			}
-			if(count($_SESSION['errors']) > 0){
-				//If JS is on
-				if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-					echo json_encode($_SESSION['errors']);
-					exit;
-				}
-				//If JS is off - quick and dirty
-				echo "<ul>";
-				foreach ($_SESSION['errors'] as $key => $value) {
-					echo "<li>" . $value . "</li>";
-				}
-				echo "</ul>";
-				exit;
-			}
-			else {
-				mail($to, $subject, $message);
-			}
-		}
-
+<?php
+	//If JS is off - quick and dirty
 	
-	?>
+	if($noJS){
+
+		echo "<ul>";
+		echo "<li>" .$noJS. "</li>";
+		/*foreach ($_SESSION['errors'] as $key => $value) {
+			echo "<li>" . $value . "</li>";
+		}*/
+		echo "</ul>";
+	}	
+?>
 	<div class = "form-response">
 		<p>Thanks for reaching out. I'll get back to you as soon as I can.</p>
 	</div>
