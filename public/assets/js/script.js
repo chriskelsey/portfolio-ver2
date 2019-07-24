@@ -17,7 +17,7 @@ $('nav ul li a, .intro a').on('click',function (e) {
 });
 
 $('form').on('submit', function(e){
-	//resetErrors();
+	resetErrors();
 	$this = $(this);
 	var data = inputProcess();
 	$.ajax({
@@ -26,9 +26,10 @@ $('form').on('submit', function(e){
 		url: $this.attr('action'),
 		data: data,
 		success : function(response){
-			console.log(data);
-			console.log(response);
+			console.log('success response')
+			console.log("Response is: "+response);
 			if (!response) {
+				console.log('Yes! This worked.');
                 $this.hide();
 				$('.form-response').show();
             } else {

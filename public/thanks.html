@@ -1,6 +1,7 @@
 <?php
 //PHP form parsing for now to save time - will replace later
 	session_start();
+	$_SESSION = [];
 	if(isset($_POST)){
 		//declare variables
 		$to      = 'chris@chriskelsey.net';
@@ -47,7 +48,6 @@
 			mail($to, $subject, $message);
 		}
 	}
-	session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
