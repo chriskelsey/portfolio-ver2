@@ -231,9 +231,8 @@ input::placeholder {
 }
 
 .form-response {
-	display: none;
     clear: left;
-    margin: 3em 2em;
+    margin: 3em 2em 18.75em 2em;
     padding: 2em 0;
 }
 

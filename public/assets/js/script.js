@@ -20,25 +20,24 @@ $('form').on('submit', function(e){
 	resetErrors();
 	$this = $(this);
 	var data = inputProcess();
+
 	$.ajax({
-		dataType: 'json',
 		type: 'POST',
 		url: $this.attr('action'),
 		data: data,
+		dataType: 'json',
 		success : function(response){
-			console.log('success response')
-			console.log("Response is: "+response);
-			if (!response) {
-				console.log('Yes! This worked.');
-                $this.hide();
-				$('.form-response').show();
+			var k = Object.keys(response)[0];
+			if ( k == 'content') {
+                $this.fadeOut(250, function() {
+                	$this.after('<div class="form-response"><p>' + 	response[k] + "</p></div>");
+                });
             } else {
             	$.each(response, function(i, v) {
-	        		console.log(i + " => " + v); // view in console for error messages
                 	var msg = '<label class="error" for="'+i+'">'+v+'</label>';
                 	$('input[name="' + i + '"], textarea[name="' + i + '"]').addClass('inputError').after(msg);
             	});
-              }
+            }
 		}
 	});
 	e.preventDefault();

@@ -11,7 +11,8 @@
 		$comment = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
 		$message .= "Name: ".$name."\n";
 	    $message .= "Email: ".$from."\n";
-	    $message .= "Comments: ".$comment."\n";	
+	    $message .= "Comments: ".$comment."\n";
+	    $responseVal = array("content" => "Thanks for reaching out. I'll get back to you as soon as I can.");
 		
 		//Check for form errors
 		//Checks for numbers not being in Name, this is due to me receiving a lot of spam with random strings in the Name column
@@ -21,19 +22,17 @@
 		//Email regular expression - 90/10 rule to prevent anything else being added in.
 		if(empty($_POST['email']) || !preg_match('/^\S+@\S+\.\S+$/', $_POST['email'])){
 			$_SESSION['errors']['email'] = "Please enter a valid email address";
-		}
+		}*/
 		if(empty($_POST['message'])){
 			$_SESSION['errors']['message'] = "Please enter a comment";
-		}*/
+		}
 		if(empty($_POST['name'])){
 			$_SESSION['errors']['name'] = "Please enter a valid name " .$_POST['name'] ;
 		}
 		if(empty($_POST['email'])){
 			$_SESSION['errors']['email'] = "Please enter a valid email address";
 		}
-		if(empty($_POST['message'])){
-			$_SESSION['errors']['message'] = "Please enter a comment";
-		}
+
 		if(count($_SESSION['errors']) > 0){
 			//If JS is on
 			if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
@@ -46,8 +45,15 @@
 		}
 		else {
 			mail($to, $subject, $message);
+			echo json_encode($responseVal);
 		}
 	}
+?>
+<?php
+	//If JS is off - quick and dirty
+	
+if($noJS){
+
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -64,21 +70,19 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
-<?php
-	//If JS is off - quick and dirty
-	
-	if($noJS){
-
+	<?php
 		echo "<ul>";
 		echo "<li>" .$noJS. "</li>";
 		/*foreach ($_SESSION['errors'] as $key => $value) {
 			echo "<li>" . $value . "</li>";
 		}*/
 		echo "</ul>";
-	}	
 ?>
 	<div class = "form-response">
 		<p>Thanks for reaching out. I'll get back to you as soon as I can.</p>
 	</div>
 </body>
 </html>
+<?php 
+}
+?>
