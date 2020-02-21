@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Chris Kelsey - Full Stack Developer</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Default Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Expletus+Sans|Montserrat:400,700,900|Poppins:300" rel="stylesheet">
+	<!-- FontAwesome Icons -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<!-- Include Handlebars from a CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+	<!-- Loading the jQuery in the head for the handlebars compile-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<header>
+		<section>
+			<p class="title">Chris Kelsey</p>
+			<nav>
+				<ul>
+					<li><a href="/index.html#about">About</a></li>
+					<li><a href="/index.html#portfolio">Portfolio</a></li>
+					<li><a href="index.html#contact">Contact</a></li>
+				</ul>
+			</nav>
+		</section>
+	</header>
+	<div class="main" id="detail">
+    	<script id="detailedDescription" type="text/x-handlebars-template">
+    		<section class="clearfix">
+  				<h1>{{title}}</h1>
+  				<p>{{{introPitch}}}</p>
+  				<h3>More Information</h3>
+  				{{#each content}}
+					<p>{{{info}}}<p>
+				{{/each}}
+				<h3>Built With:</h3>
+				{{#each builtWith}}
+					<
+				{{/each}}
+  				{{#if links}}
+  				<h3>Links</h3>
+      				{{#each links}}
+        				<a href="{{url}}">{{urlName}}</a><br>
+        			{{/each}}
+    			{{/if}}
+  			</section>       
+    	</script>
+   	</div>
+    <script src="main.js"></script>
+</body>
+</html>
