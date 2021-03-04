@@ -2,6 +2,7 @@
 const intro = document.getElementById('intro');
 const navBar = document.querySelectorAll('nav ul a');
 const introLink = document.querySelector('#intro a');
+const form = document.getElementById('form');
 const formResponse = document.querySelector('.form-response');
 let num = 1;
 
@@ -62,6 +63,32 @@ function step(el, op) {
   }
 }
 
+function inputProcess(vals) {
+  var data = {};
+  for (item in vals) {
+    if (vals[item].type === 'text' || vals[item].type === 'textarea') {
+      data[vals[item].name] = vals[item].value;
+    }
+  }
+  return data;
+}
+
+async function submitForm(vals, action) {
+  const inputs = inputProcess(vals);
+  const url = action;
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: inputs,
+  };
+  let response = await fetch(url, options);
+  let result = response.json();
+  console.log(result);
+}
+
 //Event listeners
 
 //navbar scroll click
@@ -74,7 +101,6 @@ for (const link of navBar) {
 
 //Chrome remembers the location of the browser window - this will disable
 window.addEventListener('beforeunload', () => {
-  console.log('Unload Triggered');
   window.scrollTo(0, 0);
 });
 
@@ -84,16 +110,14 @@ window.addEventListener('resize', () => {
   intro.style.height = window.innerHeight + 'px';
 });
 
-/*$('nav ul li a, .intro a').on('click',function (e) {
-	var div = $(this).attr('href');
-    $('html,body').animate({
-        scrollTop: $(div).offset().top,
-        duration: 'slow',
-        method: 'swing'
-    });
-    e.preventDefault();
+//Form submit
+form.addEventListener('submit', function (e) {
+  const action = this.getAttribute('action');
+  const inputs = this.children;
+  submitForm(inputs, action);
+  e.preventDefault();
 });
-
+/*
 $('form').on('submit', function(e){
 	resetErrors();
 	$this = $(this);
@@ -120,14 +144,6 @@ $('form').on('submit', function(e){
 	});
 	e.preventDefault();
 });
-
-function inputProcess(){
-	var data = {};
-	$('input, textarea').each(function(i,v){
-		data[v.name] = v.value;
-	});
-	return data;
-}
 
 function resetErrors(){
 	$('input, textarea').removeClass('inputError');
